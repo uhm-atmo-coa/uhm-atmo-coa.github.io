@@ -1,0 +1,10 @@
+{
+  "app": {
+    "name": "ATMO Coalition",
+    "tagline": "Atmospheric science rooted in Hawaii."
+  },
+  "common": {
+    "language": "Language",
+    "loading": "Loading"
+  }
+}

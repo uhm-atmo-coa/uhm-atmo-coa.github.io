@@ -1,0 +1,31 @@
+{
+  "name": "atmo-coalition-landing",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "yarn@4.10.3",
+  "engines": {
+    "node": "20.x"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.app.json && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "i18next": "25.10.10",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-i18next": "15.7.4"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.28",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "4.7.0",
+    "autoprefixer": "10.4.27",
+    "postcss": "8.5.8",
+    "tailwindcss": "3.4.19",
+    "typescript": "5.9.3",
+    "vite": "5.4.21"
+  }
+}

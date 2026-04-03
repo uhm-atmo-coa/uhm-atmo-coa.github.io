@@ -1,0 +1,69 @@
+{
+  "name": "ATMO Coalition",
+  "palette": {
+    "primary": {
+      "manoaGreen": "#024731",
+      "deepNavy": "#071E30",
+      "midnightBlue": "#0B2E4D",
+      "pureWhite": "#FFFFFF"
+    },
+    "atmospheric": {
+      "teal": "#175763",
+      "blue": "#1B718C",
+      "ocean": "#579CAC",
+      "sky": "#50A2B9",
+      "aqua": "#A5D8E0"
+    },
+    "environmental": {
+      "forest": "#3B6150",
+      "valley": "#6E8956"
+    },
+    "solar": {
+      "gold": "#DAA069",
+      "warmSand": "#AD9B65"
+    },
+    "neutral": {
+      "slate": "#5A7A8B",
+      "silver": "#B0B9A4",
+      "cloud": "#F2F5F3"
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "primary": "Inter, sans-serif",
+      "secondary": "Roboto, sans-serif"
+    },
+    "fontSize": {
+      "small": "0.875rem",
+      "medium": "1rem",
+      "large": "1.25rem",
+      "xlarge": "1.5rem"
+    },
+    "fontWeight": {
+      "light": 300,
+      "regular": 400,
+      "medium": 500,
+      "bold": 700
+    }
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px"
+  },
+  "borderRadius": {
+    "none": "0",
+    "sm": "4px",
+    "md": "8px",
+    "lg": "16px",
+    "full": "9999px"
+  },
+  "shadows": {
+    "none": "none",
+    "sm": "0 1px 2px rgba(0, 0, 0, 0.05)",
+    "md": "0 4px 6px rgba(0, 0, 0, 0.1)",
+    "lg": "0 10px 15px rgba(0, 0, 0, 0.15)"
+  }
+}
