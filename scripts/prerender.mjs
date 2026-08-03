@@ -61,9 +61,21 @@ function writePage(outPath, html) {
 }
 
 // Real HTML file per route, so each URL returns 200 with indexable markup.
+// Non-root routes are written twice: `about.html` so the canonical, slash-less
+// /about serves a direct 200 (Pages resolves extensionless requests to .html),
+// and `about/index.html` so /about/ also works instead of 404ing. Both carry
+// the same canonical, so the duplicate is not an SEO problem.
 for (const path of prerenderRoutes) {
   const html = buildPage({ path, meta: getPageMeta(path) });
-  writePage(path === '/' ? 'index.html' : `${path.slice(1)}/index.html`, html);
+
+  if (path === '/') {
+    writePage('index.html', html);
+  } else {
+    const slug = path.slice(1);
+    writePage(`${slug}.html`, html);
+    writePage(`${slug}/index.html`, html);
+  }
+
   console.log(`prerendered ${path}`);
 }
 
