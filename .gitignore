@@ -9,3 +9,10 @@ dist
 !.yarn/versions
 .pnp.*
 .DS_Store
+
+# local notes / scratch
+todo.txt
+Constitution.txt
+
+# yarn is the package manager
+package-lock.json

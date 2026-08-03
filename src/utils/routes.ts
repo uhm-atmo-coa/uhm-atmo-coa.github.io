@@ -10,14 +10,9 @@ export const routes = [
     path: '/about',
   },
   {
-    key: 'events',
-    label: 'Events',
-    path: '/events',
-  },
-  {
-    key: 'resources',
-    label: 'Resources',
-    path: '/resources',
+    key: 'board',
+    label: 'Meet the Board',
+    path: '/board',
   },
   {
     key: 'contact',

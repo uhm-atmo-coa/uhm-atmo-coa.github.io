@@ -18,10 +18,10 @@ export default function NavLink({ children, currentPath, href }: NavLinkProps) {
     <a
       aria-current={isActive ? 'page' : undefined}
       className={[
-        'rounded-brand-full border px-brand-md py-2 text-brand-sm font-brand-medium transition-colors',
+        'rounded-brand-full px-4 py-1.5 text-brand-sm font-brand-medium transition-colors',
         isActive
-          ? 'border-brand-solar-gold bg-brand-solar-gold text-brand-navy'
-          : 'border-brand-atmospheric-blue/50 text-brand-white hover:border-brand-atmospheric-aqua hover:bg-brand-white/10',
+          ? 'bg-brand-solar-gold text-brand-navy'
+          : 'text-brand-neutral-cloud hover:bg-brand-white/10 hover:text-brand-white',
       ].join(' ')}
       href={href}
       onClick={(event) => {
