@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import logoOnly from './assets/logo_only.png';
 import LanguageToggle from './components/LanguageToggle';
 import SiteNav from './components/SiteNav';
 import { useCurrentPath } from './hooks/useCurrentPath';
@@ -17,8 +16,8 @@ const pageByRouteKey = {
   home: HomePage,
 } as const;
 
-export default function App() {
-  const currentPath = useCurrentPath();
+export default function App({ path }: { path?: string }) {
+  const currentPath = useCurrentPath(path);
   const route = getRoute(currentPath);
   const ActivePage = route ? pageByRouteKey[route.key as keyof typeof pageByRouteKey] : NotFoundPage;
   const { t } = useTranslation();
@@ -39,7 +38,13 @@ export default function App() {
                 navigateTo('/');
               }}
             >
-              <img src={logoOnly} alt="ATMO Coalition" className="h-11 w-11" />
+              <img
+                src="/logo_nav.webp"
+                alt="ATMO Coalition"
+                width={44}
+                height={44}
+                className="h-11 w-11"
+              />
             </a>
           )}
 

@@ -16,3 +16,5 @@ Constitution.txt
 
 # yarn is the package manager
 package-lock.json
+
+.ssr-build

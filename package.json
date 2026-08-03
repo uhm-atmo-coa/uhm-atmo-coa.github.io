@@ -9,8 +9,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit -p tsconfig.app.json && vite build",
-    "preview": "vite preview"
+    "build": "tsc --noEmit -p tsconfig.app.json && vite build && yarn build:ssr && node scripts/prerender.mjs",
+    "preview": "vite preview",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir .ssr-build --emptyOutDir --logLevel warn"
   },
   "dependencies": {
     "i18next": "25.10.10",

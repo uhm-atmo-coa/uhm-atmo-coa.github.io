@@ -1,4 +1,3 @@
-import logoOnly from '../assets/logo_only.png';
 import { useInView } from '../hooks/useInView';
 import { navigateTo } from '../utils/routes';
 
@@ -34,8 +33,10 @@ export default function HomePage() {
       {/* Hero — full viewport */}
       <section className="flex min-h-[calc(100vh-3.75rem)] flex-col items-center justify-center bg-gradient-to-b from-brand-navy to-brand-midnight px-6 py-20 text-center">
         <img
-          src={logoOnly}
+          src="/logo_only.webp"
           alt="ATMO Coalition"
+          width={384}
+          height={384}
           className="anim-fade-up mb-8 h-96 w-96 drop-shadow-2xl"
           style={{ animationDelay: '0ms' }}
         />
