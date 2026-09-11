@@ -87,7 +87,32 @@ Preview the production build locally:
 yarn preview
 ```
 
-## Deploy Model
+## Local testing with Docker Compose
+
+Start the site with Node 20 and the pinned Yarn dependencies in Docker:
+
+```bash
+docker compose up --build -d
+```
+
+Open http://localhost:5187/board. To choose another host port, run
+`ATMO_PORT=5188 docker compose up -d`. Changes to `src/`, `public/`, and
+`index.html` update the running development server. Rebuild after changing
+dependencies or configuration.
+
+Run the full production build inside the container:
+
+```bash
+docker compose exec web yarn build
+```
+
+Stop the local site with `docker compose down`.
+
+Board names, responsibilities, and research summaries live in
+`src/pages/BoardPage.tsx`. Supporting roles appear below the board.
+Portrait files live in `public/images/team/`.
+
+## Static deployment
 
 This site should deploy as static files.
 

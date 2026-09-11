@@ -3,50 +3,37 @@ import { useInView } from '../hooks/useInView';
 // Edit the boardMembers array to update the board listing.
 const boardMembers = [
   {
-    name: 'First Last',
+    name: 'Jake Casselman',
     title: 'President',
-    bio: 'Provides overall leadership, facilitates Executive Board meetings, and represents non-faculty member interests to the department.',
-    initials: 'FL',
+    bio: 'Provides overall leadership, facilitates board meetings, and represents member interests to the department.',
+    research: 'Studies how climate variability influences cooling efficiency and energy demand.',
+    initials: 'JC',
+    photo: '/images/team/jake-casselman.jpg',
   },
   {
-    name: 'First Last',
-    title: 'Vice-President',
-    bio: 'Supports the President in all duties, assists with planning and coordination of activities, and assumes the President\'s responsibilities when needed.',
-    initials: 'FL',
+    name: 'Elliott Fosler-Lussier',
+    title: 'Vice President',
+    bio: 'Supports the President and helps plan and coordinate coalition activities.',
+    research: 'Researches hurricanes, with a focus on eyewall replacement cycles.',
+    initials: 'EF',
+    photo: '/images/team/elliott-fosler-lussier.jpeg',
   },
   {
-    name: 'First Last',
-    title: 'Secretary',
-    bio: 'Maintains meeting records and organizational documentation, takes and distributes meeting minutes, and manages internal communications.',
-    initials: 'FL',
-  },
-  {
-    name: 'First Last',
+    name: 'Wasfia (Fia) Hoque',
     title: 'Events Coordinator',
-    bio: 'Coordinates planning and execution of ATMO Coalition events and tracks any associated expenses.',
-    initials: 'FL',
+    bio: 'Plans and coordinates coalition events and tracks associated expenses.',
+    research: 'Uses chemistry-climate models to study the atmospheric effects of fluorinated gases (F-gases).',
+    initials: 'WH',
+    photo: '/images/team/wasfia-hoque.jpg',
   },
   {
-    name: 'First Last',
+    name: 'Cameron Chuss',
     title: 'Outreach Coordinator',
-    bio: 'Leads outreach efforts within the department and beyond, coordinates with other student organizations, and manages external-facing communications.',
-    initials: 'FL',
+    bio: 'Coordinates outreach, connects with other student organizations, and manages external communications.',
+    research: 'Works on island-scale forecasting using high-resolution models.',
+    initials: 'CC',
+    photo: '/images/team/cameron-chuss.jpg',
   },
-  {
-    name: 'First Last',
-    title: 'Webmaster',
-    bio: 'Maintains the ATMO Coalition website and manages the coalition\'s digital presence.',
-    initials: 'FL',
-  },
-];
-
-const avatarColors = [
-  'bg-brand-atmospheric-teal',
-  'bg-brand-manoa-green',
-  'bg-brand-atmospheric-blue',
-  'bg-brand-midnight',
-  'bg-brand-environmental-forest',
-  'bg-brand-atmospheric-ocean',
 ];
 
 export default function BoardPage() {
@@ -60,7 +47,7 @@ export default function BoardPage() {
           <div
             ref={headerRef}
             className={[
-              'mb-10 transition-all duration-700 ease-out',
+              'mb-10 text-center transition-all duration-700 ease-out',
               headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
             ].join(' ')}
           >
@@ -70,34 +57,79 @@ export default function BoardPage() {
             <h1 className="text-4xl font-brand-bold text-brand-navy">Meet the Board</h1>
           </div>
 
-          <div ref={gridRef} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div ref={gridRef} className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {boardMembers.map((member, i) => (
               <div
                 key={`${member.title}-${i}`}
                 className={[
-                  'rounded-brand-lg bg-brand-white p-8 shadow-brand-sm transition-all duration-700 ease-out',
+                  'w-full rounded-2xl bg-brand-white p-5 shadow-brand-sm ring-1 ring-brand-navy/10 transition-all duration-700 ease-out sm:p-6',
                   gridInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
                 ].join(' ')}
                 style={{ transitionDelay: gridInView ? `${i * 80}ms` : '0ms' }}
               >
-                <div
-                  className={[
-                    'mb-5 flex h-14 w-14 items-center justify-center rounded-brand-full text-lg font-brand-bold text-brand-solar-gold',
-                    avatarColors[i % avatarColors.length],
-                  ].join(' ')}
-                >
-                  {member.initials}
+                <div className="flex items-center gap-4 sm:gap-5">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="block h-auto w-28 shrink-0 rounded-lg sm:w-32"
+                  />
+                  <div className="min-w-0">
+                    <p className="mb-2 text-brand-sm font-brand-medium tracking-wide text-brand-atmospheric-teal">
+                      {member.title}
+                    </p>
+                    <h2 className="text-xl font-brand-bold text-brand-navy">{member.name}</h2>
+                    <div aria-hidden="true" className="mt-4 h-0.5 w-12 rounded-full bg-gradient-to-r from-brand-atmospheric-teal to-brand-atmospheric-blue" />
+                  </div>
                 </div>
-                <h3 className="font-brand-bold text-brand-navy">{member.name}</h3>
-                <p className="mt-0.5 text-brand-sm font-brand-medium text-brand-atmospheric-teal">
-                  {member.title}
-                </p>
-                <p className="mt-3 text-brand-sm leading-relaxed text-brand-neutral-slate">
-                  {member.bio}
-                </p>
+                <div className="mt-5 border-t border-brand-navy/10 pt-4">
+                  <p className="text-base leading-relaxed text-brand-neutral-slate">
+                    {member.bio}
+                  </p>
+                  <p className="mt-3 text-base leading-relaxed text-brand-neutral-slate">
+                    {member.research}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
+
+          <section aria-labelledby="supporting-roles" className="mt-12 border-t border-brand-neutral-slate/20 pt-8">
+            <h2 id="supporting-roles" className="text-xl font-brand-bold text-brand-navy">Supporting roles</h2>
+            <div className="mt-5 flex items-start gap-4">
+              <img
+                src="/images/team/gerardo-rivera-tello.png"
+                alt="Gerardo Rivera Tello"
+                width={616}
+                height={730}
+                loading="lazy"
+                className="aspect-[616/730] w-20 shrink-0 rounded-lg object-cover object-center"
+              />
+              <div>
+                <h3 className="text-brand-sm font-brand-bold text-brand-navy">Gerardo Rivera Tello</h3>
+                <p className="text-brand-sm font-brand-medium text-brand-atmospheric-teal">Website Coordinator</p>
+                <p className="mt-1 text-brand-sm leading-relaxed text-brand-neutral-slate">
+                  Maintains the coalition website and its digital presence.
+                </p>
+              </div>
+            </div>
+            <div className="mt-5 flex items-start gap-4">
+              <img
+                src="/images/team/theo-carr.jpg"
+                alt="Theo Carr"
+                width={616}
+                height={730}
+                loading="lazy"
+                className="aspect-[616/730] w-20 shrink-0 rounded-lg object-cover object-center"
+              />
+              <div>
+                <h3 className="text-brand-sm font-brand-bold text-brand-navy">Theo Carr</h3>
+                <p className="text-brand-sm font-brand-medium text-brand-atmospheric-teal">Collaborator &amp; Facilitator</p>
+                <p className="mt-1 text-brand-sm leading-relaxed text-brand-neutral-slate">
+                  Helps with logistics and planning for coalition activities.
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </div>

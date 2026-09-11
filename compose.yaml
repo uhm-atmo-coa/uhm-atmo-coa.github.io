@@ -1,0 +1,9 @@
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:${ATMO_PORT:-5187}:5173"
+    volumes:
+      - ./src:/app/src:ro
+      - ./public:/app/public:ro
+      - ./index.html:/app/index.html:ro
