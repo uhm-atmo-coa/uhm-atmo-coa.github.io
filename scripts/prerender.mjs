@@ -21,7 +21,8 @@ function escapeHtml(value) {
 }
 
 function headFor({ title, description, canonical, noindex, preloadHero }) {
-  const ogImage = `${siteUrl}/og-image.jpg`;
+  const ogImage = `${siteUrl}/og-atmo-koolau.jpg`;
+  const ogImageAlt = 'ATMO Coalition logo and University of Hawaiʻi at Mānoa title over a photograph of Oʻahu’s Koʻolau Range and coastline.';
 
   return [
     `<title>${escapeHtml(title)}</title>`,
@@ -33,10 +34,15 @@ function headFor({ title, description, canonical, noindex, preloadHero }) {
     `<meta property="og:description" content="${escapeHtml(description)}" />`,
     `<meta property="og:url" content="${canonical}" />`,
     `<meta property="og:image" content="${ogImage}" />`,
+    `<meta property="og:image:type" content="image/jpeg" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="${escapeHtml(ogImageAlt)}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${escapeHtml(title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(description)}" />`,
     `<meta name="twitter:image" content="${ogImage}" />`,
+    `<meta name="twitter:image:alt" content="${escapeHtml(ogImageAlt)}" />`,
     // The hero logo is the LCP element on the home page only.
     preloadHero ? '<link rel="preload" as="image" href="/logo_only.webp" />' : '',
   ]
