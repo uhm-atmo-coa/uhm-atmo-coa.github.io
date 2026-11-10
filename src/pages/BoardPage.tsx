@@ -206,7 +206,6 @@ export default function BoardPage() {
                     alt={person.name}
                     width={80}
                     height={107}
-                    loading="lazy"
                     className="aspect-[3/4] w-20 shrink-0 rounded-lg object-cover object-top"
                   />
                   <div className="flex h-full min-w-0 flex-col">
