@@ -17,22 +17,22 @@ const meta: Record<RoutePath, PageMeta> = {
   '/': {
     title: 'ATMO Coalition — University of Hawaiʻi at Mānoa',
     description:
-      'The ATMO Coalition is a student-led group in the Department of Atmospheric Sciences at the University of Hawaiʻi at Mānoa, building community and support for atmospheric science students.',
+      'The ATMO Coalition is the departmental council for graduate students, postdocs, and research staff in the Department of Atmospheric Sciences at the University of Hawaiʻi at Mānoa.',
   },
   '/about': {
     title: 'About — ATMO Coalition',
     description:
-      'Learn about the ATMO Coalition: our mission, our focus areas, and how we support atmospheric sciences students at the University of Hawaiʻi at Mānoa.',
+      'Learn about the ATMO Coalition: our purpose, who can join, and how we support non-faculty researchers in Atmospheric Sciences at the University of Hawaiʻi at Mānoa.',
   },
   '/board': {
     title: 'Meet the Board — ATMO Coalition',
     description:
-      'Meet the student board members leading the ATMO Coalition at the University of Hawaiʻi at Mānoa.',
+      'Meet the board and supporting members of the ATMO Coalition at the University of Hawaiʻi at Mānoa.',
   },
   '/contact': {
     title: 'Contact — ATMO Coalition',
     description:
-      'Get in touch with the ATMO Coalition at the University of Hawaiʻi at Mānoa.',
+      'Get in touch with the ATMO Coalition at the University of Hawaiʻi at Mānoa, by email or through our anonymous form.',
   },
 };
 

@@ -18,7 +18,7 @@ export default function NavLink({ children, currentPath, href }: NavLinkProps) {
     <a
       aria-current={isActive ? 'page' : undefined}
       className={[
-        'rounded-brand-full px-4 py-1.5 text-brand-sm font-brand-medium transition-colors',
+        'whitespace-nowrap rounded-brand-full px-3 py-1.5 text-brand-sm sm:px-4 font-brand-medium transition-colors',
         isActive
           ? 'bg-brand-solar-gold text-brand-navy'
           : 'text-brand-neutral-cloud hover:bg-brand-white/10 hover:text-brand-white',

@@ -1,7 +1,7 @@
 import { useInView } from '../hooks/useInView';
 import { navigateTo } from '../utils/routes';
 
-// Edit this array to populate the focus areas.
+// Focus areas, drawn from Article II of the Coalition constitution.
 const focusAreas = [
   {
     number: '01',
@@ -13,7 +13,7 @@ const focusAreas = [
     number: '02',
     accent: 'bg-brand-manoa-green',
     title: 'Professional Development',
-    description: 'From workshops to networking opportunities, we help members grow academically and professionally throughout their time at UH Mānoa.',
+    description: 'We serve as a hub for professional development, helping members build lasting professional relationships throughout their time at UH Mānoa.',
   },
   {
     number: '03',
@@ -95,9 +95,10 @@ export default function HomePage() {
           </h2>
           <div className="mb-8 h-1 w-12 rounded-brand-full bg-brand-solar-gold" />
           <p className="max-w-2xl text-brand-md leading-relaxed text-brand-neutral-slate">
-            ATMO Coalition brings together students passionate about atmospheric science at UH
-            Mānoa. We foster academic growth, professional development, and community
-            engagement—while honoring our deep connection to the land and climate of Hawaiʻi.
+            The ATMO Coalition represents the graduate students, postdocs, and research staff of
+            the Department of Atmospheric Sciences at UH Mānoa. We strengthen communication,
+            collaboration, and community in the department, and make sure non-faculty voices are
+            heard.
           </p>
         </div>
       </section>
@@ -151,7 +152,7 @@ export default function HomePage() {
         >
           <h2 className="mb-4 text-3xl font-brand-bold text-brand-white">Join the Coalition</h2>
           <p className="mb-8 text-brand-md leading-relaxed text-brand-neutral-cloud/80">
-            Open to all non-faculty members of the Department of Atmospheric Sciences — graduate students, postdocs, and research staff. Reach out and join us.
+            Open to all non-faculty research members of the Department of Atmospheric Sciences: graduate students, postdocs, and research staff. Reach out and join us.
           </p>
           <button
             className="rounded-brand-full bg-brand-solar-gold px-9 py-3.5 font-brand-bold text-brand-navy transition-opacity hover:opacity-90"

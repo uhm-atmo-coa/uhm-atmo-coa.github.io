@@ -7,7 +7,7 @@ interface SiteNavProps {
 
 export default function SiteNav({ currentPath }: SiteNavProps) {
   return (
-    <nav aria-label="Primary" className="flex flex-wrap items-center justify-center gap-1">
+    <nav aria-label="Primary" className="flex flex-wrap items-center justify-center gap-0.5 sm:gap-1">
       {routes.map((route) => (
         <NavLink key={route.path} currentPath={currentPath} href={route.path}>
           {route.label}

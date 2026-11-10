@@ -26,9 +26,14 @@ function detectLanguage(): SupportedLanguage {
   return fallbackLanguage;
 }
 
+// The Hawaiian toggle is paused until Hawaiian copy exists, so the site is pinned to
+// English. To re-enable, use `lng: detectLanguage()` again and uncomment
+// <LanguageToggle /> in src/App.tsx. The `haw` resources stay loaded.
+void detectLanguage; // kept for re-enabling; referenced so it is not flagged as unused
+
 void i18n.use(initReactI18next).init({
   resources,
-  lng: detectLanguage(),
+  lng: fallbackLanguage, // was: detectLanguage()
   fallbackLng: fallbackLanguage,
   defaultNS: defaultNamespace,
   interpolation: {

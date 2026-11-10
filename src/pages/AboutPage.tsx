@@ -1,26 +1,31 @@
 import { useInView } from '../hooks/useInView';
 import { navigateTo } from '../utils/routes';
 
+// Each item paraphrases the Coalition constitution (article noted alongside).
 const values = [
   {
-    title: 'Academic Excellence',
+    // Art. II, Sec. 1
+    title: 'Communication & Collaboration',
     description:
-      'We champion rigorous study and intellectual curiosity in atmospheric and climate science.',
+      'We strengthen communication and collaboration within the department, connecting researchers at all career stages with one another and with faculty.',
   },
   {
-    title: 'Community',
+    // Art. II, Sec. 2
+    title: 'Community & Professional Growth',
     description:
-      'We build genuine relationships among students, faculty, and the broader UH Mānoa community.',
+      'Through organized events and shared initiatives, we help members build lasting professional relationships and a strong, supportive academic community.',
   },
   {
-    title: 'Environmental Kuleana',
+    // Art. II, Sec. 2; Art. IV, Sec. 3
+    title: 'A Voice for Non-Faculty Members',
     description:
-      'Kuleana means responsibility. We take seriously our obligation to the land and climate we study.',
+      'We make sure non-faculty voices are represented and heard. Our President represents member interests to the department.',
   },
   {
+    // Art. III
     title: 'Inclusive Membership',
     description:
-      'Open to all non-faculty members of the department — graduate students, postdocs, and research staff — regardless of background or identity.',
+      'Open to all non-faculty research members of the department: graduate students, postdoctoral researchers, and research staff. The Coalition does not discriminate on any basis listed in its constitution, including race, sex, gender identity, religion, national origin, disability, and sexual orientation.',
   },
 ];
 
@@ -46,9 +51,9 @@ export default function AboutPage() {
           <h1 className="mb-10 text-4xl font-brand-bold text-brand-navy">ATMO Coalition</h1>
 
           <p className="mb-6 max-w-2xl text-brand-md leading-relaxed text-brand-neutral-slate">
-            ATMO Coalition is a departmental council representing non-faculty members of the
-            Department of Atmospheric Sciences at the University of Hawaiʻi at Mānoa. We work
-            to strengthen communication, collaboration, and community within the department by
+            The ATMO Coalition (formally the Atmospheric Sciences Researchers Coalition at the
+            University of Hawaiʻi at Mānoa) is a departmental council representing non-faculty
+            members of the Department of Atmospheric Sciences. We work to strengthen communication, collaboration, and community within the department by
             connecting researchers at all career stages with one another and with faculty.
           </p>
           <p className="max-w-2xl text-brand-md leading-relaxed text-brand-neutral-slate">
@@ -73,7 +78,7 @@ export default function AboutPage() {
             <p className="mb-3 text-xs font-brand-medium uppercase tracking-[0.22em] text-brand-atmospheric-blue">
               What We Stand For
             </p>
-            <h2 className="mb-10 text-3xl font-brand-bold text-brand-navy">Our Values</h2>
+            <h2 className="mb-10 text-3xl font-brand-bold text-brand-navy">Our Purpose</h2>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {values.map((value, i) => (
@@ -112,9 +117,11 @@ export default function AboutPage() {
           </p>
           <h2 className="mb-4 text-3xl font-brand-bold text-brand-navy">Get Involved</h2>
           <p className="mb-8 max-w-xl text-brand-md leading-relaxed text-brand-neutral-slate">
-            Membership is open to all non-faculty members of the Department of Atmospheric
-            Sciences — graduate students, postdoctoral researchers, and research staff. We meet
-            at least once a month. Follow us on social media or reach out — we'd love to have you.
+            Membership is open to all non-faculty research members of the Department of
+            Atmospheric Sciences, including graduate students, postdoctoral researchers, and
+            research staff. We meet at least once a month, and you can take part asynchronously
+            if you can't make a meeting. Each February, the annual membership meeting elects the
+            Executive Board, and every member can vote. Reach out; we'd love to have you.
           </p>
           <div className="flex flex-wrap gap-4">
             <button
