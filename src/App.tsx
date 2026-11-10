@@ -82,7 +82,7 @@ export default function App({ path }: { path?: string }) {
 
       <footer className="bg-brand-navy py-8 text-brand-neutral-cloud">
         <div className="mx-auto max-w-6xl px-6 text-center">
-          <p className="text-brand-sm">© {year} ATMO Coalition · University of Hawai'i at Mānoa</p>
+          <p className="text-brand-sm">© {year} ATMO Coalition · University of Hawaiʻi at Mānoa</p>
           <p className="mt-1 text-brand-sm text-brand-neutral-slate">{t('app.tagline')}</p>
         </div>
       </footer>
