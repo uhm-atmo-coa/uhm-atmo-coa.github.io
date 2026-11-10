@@ -1,4 +1,6 @@
-# Atmo Coalition Landing
+# ATMO Coalition website
+
+The public site of the ATMO Coalition (Atmospheric Sciences Researchers Coalition at UH Mānoa), live at https://uhm-atmo-coa.github.io.
 
 This repo is intentionally conservative.
 
@@ -26,7 +28,7 @@ In practice, that means:
 It also means we intentionally do not use:
 
 - `Next.js`
-- server-side rendering
+- a runtime server (pages are prerendered to static HTML at build time; nothing runs server-side once deployed)
 - API routes in this repo
 - a routing dependency unless the site grows beyond what a tiny local route table can handle
 - a UI component library
@@ -48,7 +50,8 @@ This is deliberate. The stack should drift as little as possible.
 
 ## Setup
 
-Use Node 20 and the pinned Yarn version.
+Use Node 20 (pinned in `.nvmrc`; the deploy workflow uses the same file) and the
+Yarn version pinned in `package.json` via Corepack.
 
 If you use `nvm`:
 
@@ -57,19 +60,14 @@ nvm install
 nvm use
 ```
 
-If Yarn is not already available through Corepack:
+Install dependencies (Corepack picks up the pinned Yarn 4):
 
 ```bash
-corepack enable
-```
-
-Install dependencies:
-
-```bash
+corepack enable        # once per machine; or prefix commands with `corepack`
 yarn install
 ```
 
-Start the dev server:
+Start the dev server (http://localhost:5173 by default):
 
 ```bash
 yarn dev
@@ -80,6 +78,11 @@ Create a production build:
 ```bash
 yarn build
 ```
+
+`yarn build` does four things: type-checks (`tsc`), builds the client bundle into
+`dist/`, builds a server bundle of the app (`build:ssr`), and runs
+`scripts/prerender.mjs`, which renders every route to static HTML. Fix any type
+error before pushing; the deploy runs the same command.
 
 Preview the production build locally:
 
@@ -112,32 +115,24 @@ Board names, responsibilities, and research summaries live in
 `src/pages/BoardPage.tsx`. Supporting roles appear below the board.
 Portrait files live in `public/images/team/`.
 
-## Static deployment
+## Deployment (GitHub Pages)
 
-This site should deploy as static files.
+The site deploys automatically with GitHub Actions (`.github/workflows/deploy.yml`):
 
-The expected flow is:
+- **Trigger:** every push to `main` (and manual runs from the Actions tab). Pushes to
+  other branches do not deploy, so work on a branch and merge to `main` when ready.
+- **Steps:** `yarn install --immutable`, `yarn build`, then upload `dist/` to GitHub Pages.
 
-1. Run `yarn build`
-2. Take the generated `dist/` folder
-3. Deploy `dist/` to static hosting
+There is no server: `scripts/prerender.mjs` writes a real HTML file for each route,
+so every URL returns a 200 with indexable markup:
 
-Do not make the live site depend on a Node server unless the organization has explicitly decided to take on that maintenance burden.
+- `/` → `dist/index.html`
+- `/about` → `dist/about.html` and `dist/about/index.html` (same for `/board`, `/contact`)
+- any other path → `dist/404.html` (served by Pages with a 404 status)
+- plus `sitemap.xml`, `robots.txt` and `.nojekyll`
 
-If you use client-side routes such as `/about` or `/contact`, the static host must rewrite unknown paths back to `index.html`.
-
-For Firebase Hosting, the minimal pattern is:
-
-```json
-{
-  "hosting": {
-    "public": "dist",
-    "rewrites": [{ "source": "**", "destination": "/index.html" }]
-  }
-}
-```
-
-Without that rewrite, loading `/about` directly in the browser will 404 even though the route works when clicked from inside the app.
+When you add a route, add it to `src/utils/routes.ts` and give it a title and
+description in `src/utils/seo.ts`; the prerender and sitemap pick it up from there.
 
 ## Routing
 
@@ -148,89 +143,78 @@ Routing is intentionally local and small.
 - `src/components/NavLink.tsx` uses `history.pushState` for in-app navigation
 - each page lives in `src/pages/*.tsx`
 
-Current starter routes:
+Current routes:
 
-- `/`
-- `/about`
-- `/events`
-- `/resources`
-- `/contact`
+| Path       | Page file                   | Content                                         |
+| ---------- | --------------------------- | ----------------------------------------------- |
+| `/`        | `src/pages/HomePage.tsx`    | Hero, mission, focus areas, join call-out       |
+| `/about`   | `src/pages/AboutPage.tsx`   | Purpose, membership, how to get involved        |
+| `/board`   | `src/pages/BoardPage.tsx`   | Board cards and supporting roles                |
+| `/contact` | `src/pages/ContactPage.tsx` | Anonymous form link and Coalition email         |
+
+Unknown paths render `src/pages/NotFoundPage.tsx`. `App.tsx` scrolls to the top on
+every route change.
 
 If the site eventually needs nested routing, route params, loaders, or other advanced routing features, that would be the point to reconsider a dedicated router package.
 
-## What To Edit
+## What To Edit (where content lives)
 
-Keep the editing surface obvious.
+Most copy is written directly in the page files.
 
-- `src/App.tsx`: main page structure
-- `src/components/SiteNav.tsx`: top-level navigation
-- `src/index.css`: global page styles and Tailwind entrypoint
+- `src/pages/HomePage.tsx`: home page text and the `focusAreas` array
+- `src/pages/AboutPage.tsx`: About text and the `values` array (paraphrases the Coalition
+  constitution; keep it in line with the constitution when either changes)
+- `src/pages/BoardPage.tsx`: `boardMembers` and `supportingRoles` arrays (name, title, bio,
+  research, photo, and `links` for email / LinkedIn / Google Scholar; an icon shows for
+  each link that is set)
+- `public/images/team/`: portrait files (any aspect; cards crop them to a 3:4 box)
+- `src/pages/ContactPage.tsx`: the anonymous form URL and the contact email
+- `src/utils/seo.ts`: page titles and descriptions used by the prerender
+- `src/App.tsx`: header, footer and page shell
+- `src/components/SiteNav.tsx`, `src/utils/routes.ts`: menu and route list
+- `src/locales/en/common.json`: the few strings that go through i18n (footer tagline)
 - `src/constants/brand-tokens.json`: brand colors, spacing, typography, radius, and shadows
-- `src/hooks/useCurrentPath.ts`: current URL state for the local router
-- `src/i18n/resources.ts`: supported languages and namespaces
-- `src/locales/en/common.json`: English copy
-- `src/locales/haw/common.json`: Hawaiian copy
-- `src/pages/*.tsx`: per-page content
-- `src/utils/routes.ts`: route definitions and path helpers
+- `src/index.css`: global styles and the Tailwind entrypoint
 
 ## Project Structure
 
 ```text
 .
+├── .github/workflows/deploy.yml   # build + deploy to GitHub Pages on push to main
 ├── .nvmrc
 ├── index.html
 ├── package.json
-├── postcss.config.cjs
+├── public/                        # static files (logos, social image, team photos)
+├── scripts/prerender.mjs          # build-time HTML for each route
 ├── tailwind.config.cjs
-├── tsconfig*.json
 ├── vite.config.ts
 └── src
     ├── App.tsx
-    ├── assets
-    │   ├── logo_color.png
-    │   └── logo_mono.png
-    ├── components
-    │   ├── .gitkeep
-    │   ├── LanguageToggle.tsx
-    │   ├── NavLink.tsx
-    │   ├── PagePlaceholder.tsx
-    │   └── SiteNav.tsx
-    ├── constants
-    │   ├── brand-tokens.json
-    │   └── brand.ts
-    ├── hooks
-    │   ├── .gitkeep
-    │   └── useCurrentPath.ts
-    ├── i18n
-    │   ├── index.ts
-    │   └── resources.ts
-    ├── index.css
-    ├── locales
-    │   ├── en
-    │   │   └── common.json
-    │   └── haw
-    │       └── common.json
+    ├── entry-server.tsx           # used only by the prerender
     ├── main.tsx
-    ├── pages
-    │   ├── .gitkeep
-    │   ├── AboutPage.tsx
-    │   ├── ContactPage.tsx
-    │   ├── HomePage.tsx
-    │   ├── NotFoundPage.tsx
-    │   ├── EventsPage.tsx
-    │   └── ResourcesPage.tsx
-    └── utils
-        ├── .gitkeep
-        └── routes.ts
+    ├── components/                # LanguageToggle (paused), NavLink, SiteNav
+    ├── constants/                 # brand tokens
+    ├── hooks/                     # useCurrentPath, useInView
+    ├── i18n/                      # i18next setup and resources
+    ├── locales/{en,haw}/common.json
+    ├── pages/                     # Home, About, Board, Contact, NotFound
+    └── utils/                     # routes.ts, seo.ts
 ```
 
 ## Why i18n Stays
 
-Internationalization is the one intentional extra layer in this repo.
+Internationalization is the one intentional extra layer in this repo. It is there for
+English and Hawaiian content.
 
-It stays because it maps directly to site content requirements rather than developer preference. If the organization needs English and Hawaiian content, the i18n setup earns its place.
+**The Hawaiian toggle is paused** until Hawaiian copy exists (page text is currently
+English-only and lives in the page files). The i18n plumbing and `src/locales/haw/`
+stay in place. To turn the toggle back on:
 
-If that requirement ever goes away, this is one of the first layers that should be reconsidered.
+1. In `src/App.tsx`, uncomment the `LanguageToggle` import and the `<LanguageToggle />` block in the header.
+2. In `src/i18n/index.ts`, set `lng: detectLanguage()` again.
+3. Move page copy into `src/locales/*/common.json` so it can actually be translated.
+
+If the Hawaiian requirement goes away, this is one of the first layers to reconsider.
 
 ## Tailwind and Brand Tokens
 
